@@ -15,8 +15,12 @@ public class Enemy implements Mortal {
         this.health = health;
     }
 
-    void takeDamage(int damage){
+    public void takeDamage(int damage){
         health -= damage;
+        if (health <= 0){
+            health = 0;
+        }
+        System.out.println("Enemy takes " + damage + " DAMAGE, remaining health: " + health);
     }
 
     @Override

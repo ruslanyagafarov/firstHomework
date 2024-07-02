@@ -2,12 +2,13 @@ package org.example;
 
 public class Warrior extends Hero{
     public Warrior(String name){
-        super(name);
+        super(name, 5);
     }
 
     @Override
-    public void attackEnemy(int warriorDamage){
-        enemy.takeDamage(warriorDamage);
-        System.out.println("WarriorAttacksEnemy: " + warriorDamage);
+    public void attackEnemy(Enemy enemy) {
+        int damage = 28;
+        enemy.takeDamage(damage);
+        System.out.println(getName() + " kills an enemy, dealing " + damage + " DAMAGE");
     }
 }

@@ -1,17 +1,36 @@
 package org.example;
 
-abstract class Hero {
+public abstract class Hero {
     private String name;
+    private int health;
 
-    public Hero (String name){
+    public Hero (String name, int health){
         this.name = name;
+        this.health = health;
     }
 
     public String getName() {
         return name;
     }
 
-    Enemy enemy = new Enemy(100);
+    public int getHealth() {
+        return health;
+    }
 
-    abstract void attackEnemy(int damage);
+    public void takeDamage(int damage){
+        health -= damage;
+        if (health <= 0){
+            health = 0;
+        }
+        System.out.println(name + " takes " + damage + " DAMAGE, remaining health: " + health);
+    }
+
+    public boolean isAlive() {
+        if (health > 0)
+            return true;
+        else
+            return false;
+    }
+
+    abstract void attackEnemy(Enemy enemy);
 }

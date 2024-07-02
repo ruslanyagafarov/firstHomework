@@ -2,24 +2,31 @@ package org.example;
 
 public class BattleGround {
     public static void main(String[] argc){
+        Hero archer = new Archer("Ruslan");
+        Hero mage = new Mage("Roman");
+        Hero warrior = new Warrior("Vasiliy");
 
-        Archer archer = new Archer("Ruslan");
-        archer.attackEnemy(25);
-        System.out.println("EnimyHealth: " + archer.enemy.getHealth());
-        System.out.println(archer.enemy.isAlive() + "\n");
+        Enemy enemy = new Enemy(50);
+        Enemy zombie = new Zombie(25);
 
+        battle(archer, enemy);
+        battle(mage, zombie);
+        battle(warrior, zombie);
+    }
 
-
-        Mage mage = new Mage("Roman");
-        mage.attackEnemy(50);
-        System.out.println("EnimyHealth: " + mage.enemy.getHealth());
-        System.out.println(mage.enemy.isAlive() + "\n");
-
-
-
-        Warrior warrior = new Warrior("Vasiliy");
-        warrior.attackEnemy(100);
-        System.out.println("EnimyHealth: " + warrior.enemy.getHealth());
-        System.out.println(warrior.enemy.isAlive() + "\n");
+    public static void battle(Hero hero, Enemy enemy){
+        while (hero.isAlive() && enemy.isAlive()) {
+            hero.attackEnemy(enemy);
+            if (enemy.isAlive()) {
+                int enemyDamage = 20;
+                hero.takeDamage(enemyDamage);
+                System.out.println("Enemy attacks " + hero.getName() + " dealing " + enemyDamage + " DAMAGE");
+            }
+        }
+        if (!hero.isAlive()) {
+            System.out.println(hero.getName() + " died");
+        } else if (!enemy.isAlive()) {
+            System.out.println("Enemy died by " + hero.getName());
+        }
     }
 }
